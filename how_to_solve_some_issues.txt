@@ -1,0 +1,35 @@
+
+
+# For using Terminal to access the mySQL command line client - find the path where MySQL is installed
+josemanuel at Joses-MacBook-Pro in ~$ cd /usr/local/mysql/bin/
+
+# Delete a Snippet
+(pg. 57 of textbook) Per the professor, usually I use "CTRL" on a Mac instead of right click for Windows, however for the Snippet a window did not popup allowing me to delete. Earlier in another section, I was able to execute commands on tables by using "CTRL" instead of right click.
+
+The most expedient way to delete a snippet was to right click on the snippet under the "My Snippets" tab and second from the bottom there's a delete snippet command.
+
+# SQL Scripts and its results
+(pg. 62) Why do we generally put multiple SQL statements in a script, instead of having each script contain just one SQL statement? Are there best practices to organizing multiple SQL statements between multiple scripts?
+Some people prefer to put a single SQL statement on a new sql file. You can put multiple SQL statements in the same file. To execute a single statement you can either click within it or highlight it and click the Execute button. If you just click the execute button the entire script will run. 
+
+Ordering multiple SQL statements can be important when later SQL statements depend on the previous ones to run. 
+
+If a SQL statement needs to execute before the next one it is good practice to use the keyword GO between the statements.
+
+# Shortcut to Executing Statements:
+Execute (All or Selection) -> press Ctrl + Shift + Enter keys or click the execute sql script button.
+Execute Current Statement -> move the insertion point into the statement and press Ctrl + Enter keys or click the execute current statement button.
+
+# Aliases for column names
+Per the professor, I am using aliases for column names but when I use them in a WHERE clause mySQL doesn’t recognize them. One of the most frustrating issues I see students having is why SQL doesn’t recognize their alias names for columns. For example,
+SELECT FirstName + “ “ + LastName As FullName
+FROM Customers
+WHERE FullName = “John Smith”;
+
+mySQL returns with what is FullName error. That is because mySQL always takes a breath after the WHERE and runs, so until after the WHERE mySQL has not processed the statement. The breath it takes is after the WHERE and before the ORDER BY. So
+SELECT FirstName + “ “ + LastName As FullName
+FROM Customers
+WHERE FirstName + “ “ + LastName = “John Smith”
+<< mySQL breath taken here>>
+ORDER BY FullName;
+Now mySQL recognizes FullName after the ORDER BY. This is frustrating to repeat the aliased concatenation until then, yes. There are other ways we could handle this but for now this is the price we pay for large dataset querying.
